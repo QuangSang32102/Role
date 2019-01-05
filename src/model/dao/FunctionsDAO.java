@@ -14,80 +14,80 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.dto.Roles;
+import model.dto.Functions;
+import model.dto.Users;
 import utils.DBConnector;
 
 /**
  *
  * @author USER
  */
-public class RolesDAO {
-
-    final String SQL_CREATE = "INSERT INTO ROLES(ROLEID, ROLENAME, DESCRIPTION) VALUES(?,?,?)";
-    final String SQL_READALL = "SELECT * FROM ROLES";
-    final String SQL_READBYID = "SELECT * FROM ROLES WHERE ROLEID = ?";
-    final String SQL_UPDATE = "UPDATE ROLES SET ROLENAME = ?, DESCRIPTION = ? WHERE ROLEID = ?";
-    final String SQL_DELETE = "DELETE FROM ROLES WHERE ROLEID = ?";
-    List<Roles> l = null;
-    Connection con = null;
-
-    public RolesDAO() {
+public class FunctionsDAO {
+    final String SQL_CREATE = "INSERT INTO FUNCTIONS(FUNCTIONSID, FUNCTIONNAME, DESCRIPTION) VALUES(?,?,?)";
+    final String SQL_READALL = "SELECT * FROM FUNCTIONS";
+    final String SQL_READBYID = "SELECT * FROM FUNCTIONS WHERE FUNCTIONSID = ?";
+    final String SQL_UPDATE = "UPDATE FUNCTIONS SET FUNCTIONNAME = ?, DESCRIPTION = ? WHERE FUNCTIONSID = ?";
+    final String SQL_DELETE = "DELETE FROM FUNCTIONS WHERE FUNCTIONSID = ?";
+    List<Functions> l = null;
+    Connection con = null;    
+    
+    public FunctionsDAO() {
         con = new DBConnector().getCon();
         l = new ArrayList<>();
-    }
-
-    public Roles create(Roles r) {
+    }    
+    
+    public Functions create(Functions f) {
         PreparedStatement pr ;
         try {
             pr = con.prepareStatement(SQL_CREATE);
-            pr.setInt(1, r.getRoleid());
-            pr.setString(2, r.getRolename());
-            pr.setString(3, r.getDescription());
+            pr.setInt(1, f.getFunctionsid());
+            pr.setString(2, f.getFunctionname());
+            pr.setString(3, f.getDescription());
             pr.execute();
-            return r;
+            return f;
         } catch (SQLException ex) {
             Logger.getLogger(RolesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    }
-
-    public List<Roles> readAll() {
+    }    
+    
+  public List<Functions> readAll() {
         l = new ArrayList<>();
         try {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(SQL_READALL);
             if(rs != null){
                 while(rs.next()){
-                    Roles r = new Roles();
-                    r.setRoleid(rs.getInt(1));
-                    r.setRolename(rs.getString(2));
-                    r.setDescription(rs.getString(3));
-                    l.add(r);
+                    Functions f = new Functions();
+                    f.setFunctionsid(rs.getInt(1));
+                    f.setFunctionname(rs.getString(2));
+                    f.setDescription(rs.getString(3));
+                    l.add(f);
                 }
             }
         } catch (SQLException ex) {
             Logger.getLogger(RolesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    }
+    }   
 
-    public Roles update(Roles r) {
+   public Functions update(Functions f) {
         try {
             PreparedStatement pr = con.prepareStatement(SQL_UPDATE);
-            pr.setString(1, r.getRolename());
-            pr.setString(2, r.getDescription());
-            pr.setInt(3, r.getRoleid());
+            pr.setString(1, f.getFunctionname());
+            pr.setString(2, f.getDescription());
+            pr.setInt(3, f.getFunctionsid());            
             pr.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(RolesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    }
-
-    public boolean delete(int roleid) {
+    } 
+   
+    public boolean delete(int functionsid) {
         try {
             PreparedStatement pr = con.prepareStatement(SQL_DELETE);
-            pr.setInt(1, roleid);
+            pr.setInt(1, functionsid);
             pr.execute();
             return true;
         } catch (SQLException ex) {
@@ -95,24 +95,24 @@ public class RolesDAO {
         }
         return false;
     }
-    
-    public Roles readById(int roleid){
+
+    public Functions readById(int functionsid){
         try {
             PreparedStatement pr = con.prepareStatement(SQL_READBYID);
-            pr.setInt(1, roleid);
+            pr.setInt(1, functionsid);
             ResultSet rs = pr.executeQuery(SQL_READALL);
             if(rs != null){
-                Roles r = new Roles();
+                Functions f = new Functions();
                 while(rs.next()){
-                    r.setRoleid(rs.getInt(1));
-                    r.setRolename(rs.getString(2));
-                    r.setDescription(rs.getString(3));
+                    f.setFunctionsid(rs.getInt(1));
+                    f.setFunctionname(rs.getString(2));
+                    f.setDescription(rs.getString(3));
                 }
-                return r;
+                return f;
             }
         } catch (SQLException ex) {
             Logger.getLogger(RolesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    }
+    }         
 }

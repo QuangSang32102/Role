@@ -14,10 +14,53 @@ import java.io.Serializable;
 public class Users implements Serializable, Comparable<Users>{
     
     private int id;
+    private String usersname;
+    private String password;
+    private int roleid;
+
+    public Users() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUsersname() {
+        return usersname;
+    }
+
+    public void setUsersname(String usersname) {
+        this.usersname = usersname;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getRoleid() {
+        return roleid;
+    }
+
+    public void setRoleid(int roleid) {
+        this.roleid = roleid;
+    }
 
     @Override
+    public String toString() {
+        return "Users{" + "id=" + id + ", usersname=" + usersname + ", password=" + password + ", roleid=" + roleid + '}';
+    }
+    
+    @Override
     public int compareTo(Users t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return t.getUsersname().compareTo(usersname);
     }
     
 }
