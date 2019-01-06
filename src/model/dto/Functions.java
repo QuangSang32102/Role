@@ -19,6 +19,12 @@ public class Functions implements Serializable, Comparable<Functions>{
     public Functions() {
     }
 
+    public Functions(int functionsid, String functionname, String description) {
+        this.functionsid = functionsid;
+        this.functionname = functionname;
+        this.description = description;
+    }
+    
     public int getFunctionsid() {
         return functionsid;
     }

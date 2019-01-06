@@ -9,26 +9,26 @@ import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.dao.RolesDAO;
+import model.dao.FunctionRoleDAO;
+import model.dto.FunctionRole;
 import model.dto.Functions;
-import model.dto.Roles;
 
 /**
  *
  * @author USER
  */
-public class RolesFrm extends javax.swing.JFrame {
+public class FunctionRoleFrm extends javax.swing.JFrame {
 
-    RolesDAO dao = null;
-    int rowSelected = -1;    
+    FunctionRoleDAO dao = null;
+    int rowSelected = -1;     
     /**
-     * Creates new form RolesFrm
+     * Creates new form FunctionRoleFrm
      */
-    public RolesFrm() {
+    public FunctionRoleFrm() {
         initComponents();
         setLocationRelativeTo(null);
-        dao = new RolesDAO();
-        loadTableRoles(dao.readAll());          
+        dao = new FunctionRoleDAO();
+        loadTableFunctionRole(dao.readAll());        
     }
 
     /**
@@ -46,9 +46,9 @@ public class RolesFrm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        txtId = new javax.swing.JTextField();
         txtRoleId = new javax.swing.JTextField();
-        txtRoleName = new javax.swing.JTextField();
-        txtDescription = new javax.swing.JTextField();
+        txtFunctionsId = new javax.swing.JTextField();
         btnCreate = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
@@ -74,11 +74,11 @@ public class RolesFrm extends javax.swing.JFrame {
         });
         spnMain.setViewportView(tblMain);
 
-        jLabel1.setText("RoleId :");
+        jLabel1.setText("Id :");
 
-        jLabel2.setText("RoleName :");
+        jLabel2.setText("RoleId :");
 
-        jLabel3.setText("Description :");
+        jLabel3.setText("FunctionsId");
 
         btnCreate.setText("Create");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
@@ -115,54 +115,63 @@ public class RolesFrm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(spnMain, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addGap(66, 66, 66)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtRoleId, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
-                                    .addComponent(txtRoleName)
-                                    .addComponent(txtDescription)))))
+                        .addGap(101, 101, 101)
+                        .addComponent(spnMain, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(119, 119, 119)
-                        .addComponent(btnCreate)
-                        .addGap(32, 32, 32)
-                        .addComponent(btnRefresh)
-                        .addGap(31, 31, 31)
-                        .addComponent(btnUpdate)
-                        .addGap(32, 32, 32)
-                        .addComponent(btnDelete)))
-                .addContainerGap(105, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addGap(51, 51, 51))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addGap(78, 78, 78))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addGap(14, 14, 14)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnCreate)
+                                .addGap(26, 26, 26)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtFunctionsId, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                                .addComponent(txtRoleId, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtId))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(btnRefresh)
+                                .addGap(34, 34, 34)
+                                .addComponent(btnUpdate)
+                                .addGap(39, 39, 39)
+                                .addComponent(btnDelete)))))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                .addGap(67, 67, 67)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(55, 55, 55)
+                        .addComponent(jLabel2))
                     .addComponent(txtRoleId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtRoleName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                .addGap(51, 51, 51)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
+                    .addComponent(txtFunctionsId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreate)
                     .addComponent(btnRefresh)
                     .addComponent(btnUpdate)
                     .addComponent(btnDelete))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                .addComponent(spnMain, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(spnMain, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -181,25 +190,25 @@ public class RolesFrm extends javax.swing.JFrame {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
+        int id = Integer.parseInt(txtId.getText().trim());
         int roleid = Integer.parseInt(txtRoleId.getText().trim());
-        String rolename = txtRoleName.getText().trim();
-        String description = txtDescription.getText().trim();
-        Roles r = new Roles(roleid, rolename, description);
-        if (dao.create(r) != null) {
+        int functionsid = Integer.parseInt(txtFunctionsId.getText().trim());
+        FunctionRole f = new FunctionRole(id, roleid, functionsid);
+        if (dao.create(f) != null) {
             JOptionPane.showMessageDialog(this, "Success");
-            loadTableRoles(dao.readAll());
+            loadTableFunctionRole(dao.readAll());
             rowSelected = -1;
         } else {
             JOptionPane.showMessageDialog(this, "failed");
-        }          
+        }        
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
-        txtRoleId.setEditable(true);
+        txtFunctionsId.setEditable(true);
+        txtFunctionsId.setText("");
         txtRoleId.setText("");
-        txtRoleName.setText("");
-        txtDescription.setText("");        
+        txtId.setText("");        
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -208,17 +217,17 @@ public class RolesFrm extends javax.swing.JFrame {
         if (rowSelected == -1) {
             JOptionPane.showMessageDialog(this, "Please choose row to update");
         } else {
-            int roleid = (int) tblMain.getValueAt(rowSelected, 0);
-            String rolename = txtRoleName.getText().trim();
-            String description = txtDescription.getText().trim();
-            Roles f = new Roles(roleid, rolename, description);
+            int id = (int) tblMain.getValueAt(rowSelected, 0);
+            int roleid = (int) tblMain.getValueAt(rowSelected, 1);
+            int functionsid = (int) tblMain.getValueAt(rowSelected, 2);
+            FunctionRole f = new FunctionRole(id, roleid, functionsid);
             if (dao.update(f) != null) {
                 JOptionPane.showMessageDialog(this, "Updated");
-                loadTableRoles(dao.readAll());
+                loadTableFunctionRole(dao.readAll());
             } else {
-                JOptionPane.showMessageDialog(this, "Not update id: " + roleid);
+                JOptionPane.showMessageDialog(this, "Not update id: " + functionsid);
             }
-        }          
+        }         
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -226,15 +235,15 @@ public class RolesFrm extends javax.swing.JFrame {
         if (rowSelected == -1) {
             JOptionPane.showMessageDialog(this, "Please choose row to delete");
         } else {
-            int roleid = (int) tblMain.getValueAt(rowSelected, 0);
-            String rolename = (String) tblMain.getValueAt(rowSelected, 1);
-            String description = (String) tblMain.getValueAt(rowSelected, 2);
-            Roles f = new Roles(roleid, rolename, description);
-            if (dao.delete(roleid)) {
+            int id = (int) tblMain.getValueAt(rowSelected, 0);
+            int roleid = (int) tblMain.getValueAt(rowSelected, 1);
+            int functionsid = (int) tblMain.getValueAt(rowSelected, 2);
+            FunctionRole f = new FunctionRole(id, roleid, functionsid);
+            if (dao.delete(functionsid)) {
                 JOptionPane.showMessageDialog(this, "Deleted");
-                loadTableRoles(dao.readAll());
+                loadTableFunctionRole(dao.readAll());
             } else {
-                JOptionPane.showMessageDialog(this, "Not delete id: " + roleid);
+                JOptionPane.showMessageDialog(this, "Not delete id: " + functionsid);
             }
         }         
     }//GEN-LAST:event_btnDeleteActionPerformed
@@ -242,14 +251,14 @@ public class RolesFrm extends javax.swing.JFrame {
     private void tblMainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMainMouseClicked
         // TODO add your handling code here:
         rowSelected = tblMain.getSelectedRow();
-        int roleid = (int) tblMain.getValueAt(rowSelected, 0);
-        String rolename = (String) tblMain.getValueAt(rowSelected, 1);
-        String description = (String) tblMain.getValueAt(rowSelected, 2);
+        int id = (int) tblMain.getValueAt(rowSelected, 0);
+        int roleid = (int) tblMain.getValueAt(rowSelected, 1);
+        int functionsid = (int) tblMain.getValueAt(rowSelected, 2);
 
-        txtRoleId.setText(String.valueOf(roleid));
-        txtRoleId.setEditable(false);
-        txtRoleName.setText(rolename);
-        txtDescription.setText(description);        
+        txtFunctionsId.setText(String.valueOf(functionsid));
+        txtFunctionsId.setEditable(false);
+        txtId.setText(String.valueOf(id));
+        txtRoleId.setText(String.valueOf(roleid));        
     }//GEN-LAST:event_tblMainMouseClicked
 
     /**
@@ -269,20 +278,20 @@ public class RolesFrm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RolesFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FunctionRoleFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RolesFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FunctionRoleFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RolesFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FunctionRoleFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RolesFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FunctionRoleFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RolesFrm().setVisible(true);
+                new FunctionRoleFrm().setVisible(true);
             }
         });
     }
@@ -298,26 +307,26 @@ public class RolesFrm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane spnMain;
     private javax.swing.JTable tblMain;
-    private javax.swing.JTextField txtDescription;
+    private javax.swing.JTextField txtFunctionsId;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtRoleId;
-    private javax.swing.JTextField txtRoleName;
     // End of variables declaration//GEN-END:variables
 
-    private void loadTableRoles(List<Roles> readAll) {
+    private void loadTableFunctionRole(List<FunctionRole> readAll) {
         Vector colunm = new Vector();
+        colunm.add("ID");
         colunm.add("ROLEID");
-        colunm.add("ROLENAME");
-        colunm.add("DESCRIPTION");
+        colunm.add("FUNCTIONSID");
         Vector rows = new Vector();
-        for (Roles r : readAll) {
+        for (FunctionRole f : readAll) {
             Vector row = new Vector();
-            row.add(r.getRoleid());
-            row.add(r.getRolename());
-            row.add(r.getDescription());
+            row.add(f.getId());
+            row.add(f.getRoleid());
+            row.add(f.getFunctionsid());
             rows.add(row);
         }
         tblMain.setModel(new DefaultTableModel(rows, colunm));
         tblMain.updateUI();
-        spnMain.setViewportView(this.tblMain); 
+        spnMain.setViewportView(this.tblMain);  
     }
 }

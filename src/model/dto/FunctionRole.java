@@ -20,6 +20,12 @@ public class FunctionRole implements Serializable, Comparable<FunctionRole>{
     public FunctionRole() {
     }
 
+    public FunctionRole(int id, int roleid, int functionsid) {
+        this.id = id;
+        this.roleid = roleid;
+        this.functionsid = functionsid;
+    }
+
     public int getId() {
         return id;
     }
