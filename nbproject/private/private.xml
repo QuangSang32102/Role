@@ -3,8 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/E:/NetBean/B1/adminmn/src/gui/UsersFrm.java</file>
+            <file>file:/E:/NetBean/B1/adminmn/src/gui/FunctionRoleFrm.java</file>
+            <file>file:/E:/NetBean/B1/adminmn/src/model/dao/FunctionsDAO.java</file>
+            <file>file:/E:/NetBean/B1/adminmn/src/model/dao/FunctionRoleDAO.java</file>
+            <file>file:/E:/NetBean/B1/adminmn/src/model/dao/UsersDAO.java</file>
             <file>file:/E:/NetBean/B1/adminmn/src/gui/FunctionsFrm.java</file>
-            <file>file:/E:/NetBean/B1/adminmn/src/gui/RolesFrm.java</file>
+            <file>file:/E:/NetBean/B1/adminmn/src/model/dao/RolesDAO.java</file>
         </group>
     </open-files>
 </project-private>

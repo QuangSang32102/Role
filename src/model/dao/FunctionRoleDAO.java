@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.dto.FunctionRole;
-import model.dto.Functions;
 import utils.DBConnector;
 
 /**
@@ -64,6 +63,7 @@ public class FunctionRoleDAO {
                     f.setFunctionsid(rs.getInt(3));
                     l.add(f);
                 }
+                return l;
             }
         } catch (SQLException ex) {
             Logger.getLogger(RolesDAO.class.getName()).log(Level.SEVERE, null, ex);

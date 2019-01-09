@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.dto.Roles;
 import model.dto.Users;
 import utils.DBConnector;
 
@@ -66,6 +65,7 @@ public class UsersDAO {
                     u.setRoleid(rs.getInt(4));
                     l.add(u);
                 }
+                return l;
             }
         } catch (SQLException ex) {
             Logger.getLogger(RolesDAO.class.getName()).log(Level.SEVERE, null, ex);

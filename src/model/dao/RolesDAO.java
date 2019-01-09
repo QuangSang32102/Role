@@ -64,6 +64,7 @@ public class RolesDAO {
                     r.setDescription(rs.getString(3));
                     l.add(r);
                 }
+                return l;
             }
         } catch (SQLException ex) {
             Logger.getLogger(RolesDAO.class.getName()).log(Level.SEVERE, null, ex);
