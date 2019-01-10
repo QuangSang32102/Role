@@ -109,7 +109,7 @@
                                   <Component id="txtId" alignment="0" pref="256" max="32767" attributes="0"/>
                                   <Component id="txtUsersName" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txtPassword" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtRoleId" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtRoleid" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
@@ -149,7 +149,7 @@
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtRoleId" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtRoleid" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -191,8 +191,6 @@
         <Component class="javax.swing.JTextField" name="txtUsersName">
         </Component>
         <Component class="javax.swing.JTextField" name="txtPassword">
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtRoleId">
         </Component>
         <Component class="javax.swing.JButton" name="btnCreate">
           <Properties>
@@ -250,6 +248,16 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JComboBox" name="txtRoleid">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Roles&gt;"/>
+          </AuxValues>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

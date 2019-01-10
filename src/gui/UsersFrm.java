@@ -7,19 +7,25 @@ package gui;
 
 import java.util.List;
 import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.dao.RolesDAO;
 import model.dao.UsersDAO;
+import model.dto.Roles;
 import model.dto.Users;
 
 /**
  *
  * @author USER
+ * 
  */
 public class UsersFrm extends javax.swing.JFrame {
 
     UsersDAO dao = null;
-    int rowSelected = -1;    
+    RolesDAO daoR = null;
+    int rowSelected = -1;
+
     /**
      * Creates new form UsersFrm
      */
@@ -27,7 +33,10 @@ public class UsersFrm extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         dao = new UsersDAO();
-        loadTableUsers(dao.readAll());         
+        loadTableUsers(dao.readAll());
+        daoR = new RolesDAO();
+        loadRoles(daoR.readAll());
+
     }
 
     /**
@@ -51,13 +60,13 @@ public class UsersFrm extends javax.swing.JFrame {
         txtId = new javax.swing.JTextField();
         txtUsersName = new javax.swing.JTextField();
         txtPassword = new javax.swing.JTextField();
-        txtRoleId = new javax.swing.JTextField();
         btnCreate = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         spnMain = new javax.swing.JScrollPane();
         tblMain = new javax.swing.JTable();
+        txtRoleid = new javax.swing.JComboBox<>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -163,7 +172,7 @@ public class UsersFrm extends javax.swing.JFrame {
                                 .addComponent(txtId, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
                                 .addComponent(txtUsersName)
                                 .addComponent(txtPassword)
-                                .addComponent(txtRoleId)))
+                                .addComponent(txtRoleid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(88, 88, 88)
                             .addComponent(btnCreate)
@@ -193,7 +202,7 @@ public class UsersFrm extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtRoleId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtRoleid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(65, 65, 65)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreate)
@@ -226,7 +235,8 @@ public class UsersFrm extends javax.swing.JFrame {
         int id = Integer.parseInt(txtId.getText().trim());
         String usersname = txtUsersName.getText().trim();
         String password = txtPassword.getText().trim();
-        int roleid = Integer.parseInt(txtRoleId.getText().trim());
+        Roles rSelected = (Roles) txtRoleid.getSelectedItem();
+        int roleid = rSelected.getRoleid();//= Integer.parseInt(txtRoleId.getText().trim());
         Users u = new Users(id, usersname, password, roleid);
         if (dao.create(u) != null) {
             JOptionPane.showMessageDialog(this, "Success");
@@ -234,7 +244,7 @@ public class UsersFrm extends javax.swing.JFrame {
             rowSelected = -1;
         } else {
             JOptionPane.showMessageDialog(this, "failed");
-        }       
+        }
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
@@ -243,7 +253,7 @@ public class UsersFrm extends javax.swing.JFrame {
         txtId.setText("");
         txtUsersName.setText("");
         txtPassword.setText("");
-        txtRoleId.setText("");        
+        //txtRoleId.setText("");        
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -255,7 +265,7 @@ public class UsersFrm extends javax.swing.JFrame {
             int id = (int) tblMain.getValueAt(rowSelected, 0);
             String usersname = txtUsersName.getText().trim();
             String password = txtPassword.getText().trim();
-            int roleid = Integer.parseInt(txtRoleId.getText().trim());
+            int roleid = 0;//Integer.parseInt(txtRoleId.getText().trim());
             Users u = new Users(id, usersname, password, roleid);
             if (dao.update(u) != null) {
                 JOptionPane.showMessageDialog(this, "Updated");
@@ -263,7 +273,7 @@ public class UsersFrm extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Not update id: " + id);
             }
-        }         
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -282,7 +292,7 @@ public class UsersFrm extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Not delete id: " + id);
             }
-        }        
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void tblMainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMainMouseClicked
@@ -297,7 +307,7 @@ public class UsersFrm extends javax.swing.JFrame {
         txtId.setEditable(false);
         txtUsersName.setText(usersname);
         txtPassword.setText(password);
-        txtRoleId.setText(String.valueOf(roleid));          
+        //   txtRoleId.setText(String.valueOf(roleid));          
     }//GEN-LAST:event_tblMainMouseClicked
 
     /**
@@ -353,7 +363,7 @@ public class UsersFrm extends javax.swing.JFrame {
     private javax.swing.JTable tblMain;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtPassword;
-    private javax.swing.JTextField txtRoleId;
+    private javax.swing.JComboBox<Roles> txtRoleid;
     private javax.swing.JTextField txtUsersName;
     // End of variables declaration//GEN-END:variables
 
@@ -374,6 +384,15 @@ public class UsersFrm extends javax.swing.JFrame {
         }
         tblMain.setModel(new DefaultTableModel(rows, colunm));
         tblMain.updateUI();
-        spnMain.setViewportView(this.tblMain);        
+        spnMain.setViewportView(this.tblMain);
+    }
+
+    private void loadRoles(List<Roles> readAll) {
+        Vector v = new Vector();
+        readAll.forEach((r) -> {
+            v.add(r);
+        });
+        txtRoleid.setModel(new DefaultComboBoxModel<>(v));
+
     }
 }

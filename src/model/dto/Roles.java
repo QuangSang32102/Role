@@ -51,7 +51,7 @@ public class Roles implements Serializable, Comparable<Roles>{
 
     @Override
     public String toString() {
-        return "Roles{" + "roleid=" + roleid + ", rolename=" + rolename + ", description=" + description + '}';
+        return this.rolename;
     }
 
     @Override

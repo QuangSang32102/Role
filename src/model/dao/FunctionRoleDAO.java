@@ -78,6 +78,7 @@ public class FunctionRoleDAO {
             pr.setInt(2, f.getRoleid());
             pr.setInt(3, f.getFunctionsid());            
             pr.executeUpdate();
+            return f;
         } catch (SQLException ex) {
             Logger.getLogger(RolesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

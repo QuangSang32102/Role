@@ -10,7 +10,6 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.dao.RolesDAO;
-import model.dto.Functions;
 import model.dto.Roles;
 
 /**
